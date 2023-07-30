@@ -14,7 +14,7 @@ class CreateProperties < ActiveRecord::Migration[7.0]
       t.integer :area
       t.boolean :pets_allowed
       t.text :about
-      t.boolean :close
+      t.boolean :close, default: false
       t.integer :favorites_count
       t.integer :contacts_count
       t.references :user, null: false, foreign_key: true

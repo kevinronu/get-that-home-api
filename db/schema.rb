@@ -74,7 +74,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_30_045856) do
     t.integer "area"
     t.boolean "pets_allowed"
     t.text "about"
-    t.boolean "close"
+    t.boolean "close", default: false
     t.integer "favorites_count"
     t.integer "contacts_count"
     t.bigint "user_id", null: false
