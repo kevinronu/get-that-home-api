@@ -1,13 +1,57 @@
 class FavoritesController < ApplicationController
+  before_action :require_login!, except: %i[index show]
+  before_action :set_favorite, only: %i[show destroy]
+
   # GET /favorites
   def index
+    favorites = Favorite.where(user_id: current_user.id).order(created_at: :desc)
+    favorites_data = []
+    favorites.each do |favorite|
+      favorites_data.push(favorite_data(favorite))
+    end
+    render json: favorites_data, status: :ok
+  end
+
+  # GET /favorites/:id
+  def show
+    render json: favorite_data(@favorite), status: :ok
   end
 
   # POST /favorites
   def create
+    if current_user.role == "seeker"
+      @favorite = Favorite.new(user_id: current_user.id, property_id: params[:property_id])
+
+      if @favorite.save
+        render json: favorite_data(@favorite), status: :created
+      else
+        render json: @favorite.errors, status: :unprocessable_entity
+      end
+    else
+      render_unauthorized("Invalid role")
+    end
   end
 
-  # DELETE /favorites/:id
+  # DELETE /favorites/1
   def destroy
+    if @favorite.user_id == current_user.id
+      @favorite.destroy
+    else
+      render_unauthorized("Invalid credentials")
+    end
+  end
+
+  private
+
+  def favorite_data(favorite)
+    favorite.as_json(except: %i[user_id])
+  end
+
+  def set_favorite
+    @favorite = Favorite.find(params[:id])
+  end
+
+  def favorite_params
+    params.permit(:property_id)
   end
 end

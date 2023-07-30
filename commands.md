@@ -15,6 +15,6 @@ rails g controller users show create update
 
 rails g controller properties index show create update destroy
 
-rails g controller favorites index create destroy
+rails g controller favorites index show create destroy
 
-rails g controller contacts index create destroy
+rails g controller contacts index show create destroy
