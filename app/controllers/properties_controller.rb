@@ -20,8 +20,13 @@ class PropertiesController < ApplicationController
   # POST /properties
   def create
     if current_user.role == "landlord"
-      @property = Property.new(property_params)
+      @property = Property.new(property_params.except(:images))
       @property.user = current_user
+
+      images = property_params[:images]
+      images&.each do |image|
+        property.images.attach(image)
+      end
 
       if @property.save
         render json: property_data(@property), status: :created
@@ -58,7 +63,11 @@ class PropertiesController < ApplicationController
   private
 
   def property_data(property)
-    property.as_json(except: %i[user_id])
+    property.as_json(except: %i[user_id]).merge(
+      images: property.images.map do |image|
+        url_for(image)
+      end
+    )
   end
 
   def set_property
