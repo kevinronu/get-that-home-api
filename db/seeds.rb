@@ -20,6 +20,8 @@ User.create(name: 'Landlord Di Prueba 3', email: 'landlord3@mail.com', phone: '9
             password_confirmation: 'qwerty', role: 'landlord')
 User.create(name: 'Seeker Di Prueba', email: 'seeker@mail.com', phone: '987654789', password: 'qwerty',
             password_confirmation: 'qwerty', role: 'seeker')
+User.create(name: 'Seeker Di Prueba 2', email: 'seeker2@mail.com', phone: '987654789', password: 'qwerty',
+  password_confirmation: 'qwerty', role: 'seeker')
 
 operation_types = %w[rent sale]
 property_types = %w[house apartment]
@@ -74,5 +76,6 @@ puts 'Seeding contacts'
 
 Contact.create(user_id: 4, property_id: 1)
 Contact.create(user_id: 4, property_id: 5)
+Contact.create(user_id: 5, property_id: 5)
 
 puts 'End seed'
