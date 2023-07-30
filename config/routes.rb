@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  resources :users, only: %i[show create update]
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
+
+  resources :users, only: %i[create]
+  get "/profile", to: "users#show"
+  patch "/profile", to: "users#update"
+
   resources :properties, except: %i[new edit]
   get "/my_properties", to: "my_properties#index"
   resources :favorites, only: %i[index create destroy]
