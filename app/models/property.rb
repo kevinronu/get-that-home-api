@@ -16,6 +16,8 @@ class Property < ApplicationRecord
 
   validate :validate_fields_based_on_operation_type
 
+  private
+
   def validate_fields_based_on_operation_type
     if operation_type == "sale"
       errors.add(:price, "must be present for sale") if price.blank?
