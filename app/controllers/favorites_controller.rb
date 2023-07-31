@@ -1,5 +1,5 @@
 class FavoritesController < ApplicationController
-  before_action :require_login!, except: %i[index show]
+  before_action :require_login!, except: %i[show]
   before_action :set_favorite, only: %i[show destroy]
 
   # GET /favorites
@@ -44,7 +44,12 @@ class FavoritesController < ApplicationController
   private
 
   def favorite_data(favorite)
-    favorite.as_json(except: %i[user_id])
+    property = favorite.property
+    favorite.as_json(except: %i[user_id]).merge(
+      images: property.images.map do |image|
+        url_for(image)
+      end
+    )
   end
 
   def set_favorite
