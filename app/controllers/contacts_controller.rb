@@ -21,9 +21,8 @@ class ContactsController < ApplicationController
   def create
     if current_user.role == "seeker"
       @contact = Contact.new(user_id: current_user.id, property_id: params[:property_id])
-
       if @contact.save
-        render json: contact_data(@contact), status: :created
+        render json: my_contact_data(@contact), status: :created
       else
         render json: @contact.errors, status: :unprocessable_entity
       end
