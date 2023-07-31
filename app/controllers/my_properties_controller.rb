@@ -12,6 +12,10 @@ class MyPropertiesController < ApplicationController
   private
 
   def property_data(property)
-    property.as_json(except: %i[user_id])
+    property.as_json(except: %i[user_id]).merge(
+      images: property.images.map do |image|
+        url_for(image)
+      end
+    )
   end
 end
