@@ -29,7 +29,7 @@ bedrooms_options = [1, 2, 3, 4, 5]
 bathrooms_options = [1, 2, 3, 4, 5]
 area_options = [50, 80, 100, 120, 150]
 pets_allowed_options = [true, false]
-close_options = [true, false]
+closed_options = [true, false]
 about_info = 'This is a beautiful property located in a quiet and safe area.'
 user_id = [1, 2, 3]
 
@@ -55,7 +55,7 @@ property_data = 30.times.map do |index|
     area: area_options.sample,
     pets_allowed: pets_allowed_options.sample,
     about: about_info,
-    close: close_options.sample,
+    closed: closed_options.sample,
     user_id: user_id.sample
   }
 end

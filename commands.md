@@ -3,7 +3,7 @@ rails new . --api -d postgresql --skip-test
 rails g model User name phone email:string:uniq role:integer properties_count:integer password_digest:string:uniq token:token
 --modify migration: t.integer :properties_count, default: 0
 
-rails g model Property operation_type:integer address city country price:integer monthly_rent:integer maintenance:integer property_type:integer bedrooms:integer bathrooms:integer area:integer pets_allowed:boolean about:text close:boolean favorites_count:integer contacts_count:integer user:references
+rails g model Property operation_type:integer address city country price:integer monthly_rent:integer maintenance:integer property_type:integer bedrooms:integer bathrooms:integer area:integer pets_allowed:boolean about:text closed:boolean favorites_count:integer contacts_count:integer user:references
 
 rails g model Favorite user:references property:references
 
