@@ -93,6 +93,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_30_045856) do
     t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["password_digest"], name: "index_users_on_password_digest", unique: true
     t.index ["token"], name: "index_users_on_token", unique: true
   end
 
