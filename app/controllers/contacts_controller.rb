@@ -1,5 +1,5 @@
 class ContactsController < ApplicationController
-  before_action :require_login!, except: %i[index show]
+  before_action :require_login!, except: %i[show]
   before_action :set_contact, only: %i[show]
 
   # GET /contacts
@@ -52,6 +52,10 @@ class ContactsController < ApplicationController
     contact.as_json(except: %i[user_id]).merge(
       landlord_email: landlord.email,
       landlord_phone: landlord.phone
+    ).merge(
+      images: property.images.map do |image|
+        url_for(image)
+      end
     )
   end
 
