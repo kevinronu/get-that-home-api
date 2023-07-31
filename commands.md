@@ -20,3 +20,5 @@ rails g controller favorites index show create destroy
 rails g controller contacts index show create destroy
 
 rails g migration AddIndexUserPropertyToFavorite
+
+rails g migration AddIndexUserPropertyToContact
