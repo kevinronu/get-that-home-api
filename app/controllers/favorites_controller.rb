@@ -7,7 +7,7 @@ class FavoritesController < ApplicationController
     favorites = Favorite.where(user_id: current_user.id).order(created_at: :desc)
     favorites_data = []
     favorites.each do |favorite|
-      favorites_data.push(favorite_data(favorite))
+      favorites_data.push(my_favorite_data(favorite))
     end
     render json: favorites_data, status: :ok
   end
@@ -23,7 +23,7 @@ class FavoritesController < ApplicationController
       @favorite = Favorite.new(user_id: current_user.id, property_id: params[:property_id])
 
       if @favorite.save
-        render json: favorite_data(@favorite), status: :created
+        render json: my_favorite_data(@favorite), status: :created
       else
         render json: @favorite.errors, status: :unprocessable_entity
       end
@@ -44,8 +44,13 @@ class FavoritesController < ApplicationController
   private
 
   def favorite_data(favorite)
+    favorite.as_json(except: %i[user_id])
+  end
+
+  def my_favorite_data(favorite)
     property = favorite.property
     favorite.as_json(except: %i[user_id]).merge(
+      property.as_json(except: %i[user_id]),
       images: property.images.map do |image|
         url_for(image)
       end
