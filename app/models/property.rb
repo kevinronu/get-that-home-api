@@ -1,6 +1,8 @@
 class Property < ApplicationRecord
   has_many_attached :images
   belongs_to :user, counter_cache: true
+  has_many :favorites, dependent: :destroy
+  has_many :contacts, dependent: :destroy
 
   validates :operation_type, presence: true
   validates :address, presence: true
