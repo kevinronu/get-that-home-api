@@ -50,7 +50,7 @@ class ContactsController < ApplicationController
     property = contact.property
     landlord = property.user
     contact.as_json(except: %i[user_id]).merge(
-      property.as_json(except: %i[user_id]),
+      property.as_json(except: %i[id user_id]),
       images: property.images.map do |image|
         url_for(image)
       end,

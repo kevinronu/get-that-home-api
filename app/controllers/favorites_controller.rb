@@ -34,6 +34,7 @@ class FavoritesController < ApplicationController
 
   # DELETE /favorites/1
   def destroy
+    binding.pry
     if @favorite.user_id == current_user.id
       @favorite.destroy
     else
@@ -50,7 +51,7 @@ class FavoritesController < ApplicationController
   def my_favorite_data(favorite)
     property = favorite.property
     favorite.as_json(except: %i[user_id]).merge(
-      property.as_json(except: %i[user_id]),
+      property.as_json(except: %i[id user_id]),
       images: property.images.map do |image|
         url_for(image)
       end
