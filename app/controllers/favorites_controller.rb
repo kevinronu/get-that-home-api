@@ -50,10 +50,11 @@ class FavoritesController < ApplicationController
   def my_favorite_data(favorite)
     property = favorite.property
     favorite.as_json(except: %i[user_id]).merge(
-      property.as_json(except: %i[id user_id]),
-      images: property.images.map do |image|
-        url_for(image)
-      end
+      property: property.as_json(except: %i[user_id]).merge(
+        images: property.images.map do |image|
+          url_for(image)
+        end
+      )
     )
   end
 
