@@ -34,7 +34,6 @@ class FavoritesController < ApplicationController
 
   # DELETE /favorites/1
   def destroy
-    binding.pry
     if @favorite.user_id == current_user.id
       @favorite.destroy
     else
