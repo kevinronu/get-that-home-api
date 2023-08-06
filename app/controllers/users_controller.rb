@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
   # PATCH /api/profile
   def update
-    if current_user.update(user_params)
+    if current_user.update(user_params.except(:role))
       render json: user_data(current_user), status: :ok
     else
       render json: { errors: current_user.errors }, status: :unprocessable_entity
