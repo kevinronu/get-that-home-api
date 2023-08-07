@@ -20,18 +20,18 @@ class PropertiesController < ApplicationController
   # POST /properties
   def create
     if current_user.role == "landlord"
-      @property = Property.new(property_params.except(:images))
-      @property.user = current_user
+      property = Property.new(property_params.except(:images))
+      property.user = current_user
 
       images = property_params[:images]
       images&.each do |image|
         property.images.attach(image)
       end
 
-      if @property.save
-        render json: property_data(@property), status: :created
+      if property.save
+        render json: property_data(property), status: :created
       else
-        render json: @property.errors, status: :unprocessable_entity
+        render json: property.errors, status: :unprocessable_entity
       end
     else
       render_unauthorized("Invalid role")
@@ -41,7 +41,11 @@ class PropertiesController < ApplicationController
   # PATCH/PUT /properties/1
   def update
     if @property.user_id == current_user.id
-      if @property.update(property_params)
+      if @property.update(property_params.except(:images))
+        images = property_params[:images]
+        images&.each do |image|
+          @property.images.attach(image)
+        end
         render json: property_data(@property)
       else
         render json: @property.errors, status: :unprocessable_entity
