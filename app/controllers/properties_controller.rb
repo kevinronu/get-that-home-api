@@ -43,9 +43,18 @@ class PropertiesController < ApplicationController
     if @property.user_id == current_user.id
       if @property.update(property_params.except(:images))
         images = property_params[:images]
-        images&.each do |image|
-          @property.images.attach(image)
+
+        if images.present?
+          @property.images.purge
+          images.each do |image|
+            # unless @property.images.attach(image)
+            #   render json: { error: "Failed to attach images" }, status: :unprocessable_entity
+            #   return
+            # end
+            @property.images.attach(image)
+          end
         end
+
         render json: property_data(@property)
       else
         render json: @property.errors, status: :unprocessable_entity
