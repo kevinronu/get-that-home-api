@@ -46,6 +46,7 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
   gem "rubocop-rails", require: false
+  gem "dotenv-rails"
 end
 
 gem 'aws-sdk-s3', '~> 1'
