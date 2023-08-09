@@ -49,4 +49,4 @@ group :development do
   gem "dotenv-rails"
 end
 
-gem 'aws-sdk-s3', '~> 1'
+gem 'aws-sdk-s3'
