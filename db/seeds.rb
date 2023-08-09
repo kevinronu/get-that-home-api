@@ -43,7 +43,7 @@ data_images = ['db/assets/images/image1.webp', 'db/assets/images/image2.webp', '
 property_data = 30.times.map do |index|
   {
     operation_type: operation_types.sample,
-    address: "Av. Luzuriaga 10#{index + 1}",
+    address: "Avenida Agustin Gamarra 10#{index + 1}",
     city: 'Huaraz',
     country: 'Perú',
     price: rand(100_000..500_000),
