@@ -38,6 +38,8 @@ Welcome to the Get That Home API repository! This backend powers the seamless in
    bundle install
    ```
 
+4. **Set Up Environment Variables**: To get your AWS S3 credentials visit: [AWS S3](https://aws.amazon.com/s3/). Refer to the [.env.example](https://github.com/kevinronu/get-that-home-api/blob/main/.env.example) file for details.
+
 ## Database Setup
 
 **Initialize the Database**: Create, migrate, and seed the database:
