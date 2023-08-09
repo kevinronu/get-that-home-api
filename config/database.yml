@@ -84,3 +84,4 @@ production:
   database: get_that_home_api_production
   username: get_that_home_api
   password: <%= ENV["GET_THAT_HOME_API_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
