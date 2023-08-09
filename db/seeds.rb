@@ -62,7 +62,7 @@ end
 
 property_data.each do |data|
   property = Property.create(data)
-  4.times do
+  2.times do
     property.images.attach(io: File.open(data_images.sample), filename: "fake_photo#{rand(1..1000)}.webp")
   end
 end
