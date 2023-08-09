@@ -47,3 +47,5 @@ group :development do
   # gem "spring"
   gem "rubocop-rails", require: false
 end
+
+gem 'aws-sdk-s3', '~> 1'
