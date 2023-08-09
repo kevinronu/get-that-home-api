@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "get-that-home.netlify.app"
+    origins "https://get-that-home.netlify.app:80"
 
     resource "*",
              headers: :any,
